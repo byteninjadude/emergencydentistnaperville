@@ -1,0 +1,884 @@
+/* =========================================================
+EmergencyDentistNaperville.com
+Shared Design System
+File: /assets/css/styles.css
+Purpose: visual semantics, accessibility, trust, and call-first UX
+========================================================= */
+
+/* -----------------------------
+Design Tokens
+----------------------------- */
+
+:root {
+--color-bg: #ffffff;
+--color-surface: #f7f9fb;
+--color-surface-blue: #eef8ff;
+--color-surface-deep: #f1f5f9;
+
+--color-text: #111827;
+--color-muted: #4b5563;
+--color-soft: #6b7280;
+--color-border: #dbe3ea;
+
+--color-primary: #0f5f8f;
+--color-primary-dark: #0a4569;
+--color-primary-soft: #e6f4fb;
+
+--color-emergency: #c2410c;
+--color-emergency-dark: #9a3412;
+
+--color-warning-bg: #fff7ed;
+--color-warning-border: #fed7aa;
+--color-warning-text: #7c2d12;
+
+--color-disclosure-bg: #f1f5f9;
+
+--shadow-card: 0 8px 24px rgba(17, 24, 39, 0.05);
+--shadow-card-strong: 0 16px 40px rgba(17, 24, 39, 0.08);
+--shadow-cta: 0 14px 30px rgba(15, 95, 143, 0.22);
+
+--radius-sm: 10px;
+--radius-card: 18px;
+--radius-large: 24px;
+--radius-pill: 999px;
+
+--max-width: 1180px;
+--max-width-narrow: 860px;
+--max-width-readable: 760px;
+
+--space-page-x: clamp(1rem, 5vw, 4rem);
+--space-section-y: clamp(2.75rem, 6vw, 5rem);
+--space-hero-y: clamp(3.5rem, 9vw, 7rem);
+
+--font-system: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* -----------------------------
+Base Reset
+----------------------------- */
+
+*,
+*::before,
+*::after {
+box-sizing: border-box;
+}
+
+html {
+scroll-behavior: smooth;
+text-size-adjust: 100%;
+}
+
+body {
+margin: 0;
+font-family: var(--font-system);
+color: var(--color-text);
+background: var(--color-bg);
+line-height: 1.6;
+-webkit-font-smoothing: antialiased;
+text-rendering: optimizeLegibility;
+}
+
+img,
+svg,
+video {
+display: block;
+max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+font: inherit;
+}
+
+a {
+color: var(--color-primary);
+text-decoration-thickness: 0.08em;
+text-underline-offset: 0.18em;
+}
+
+a:hover {
+color: var(--color-primary-dark);
+}
+
+a:focus-visible,
+button:focus-visible {
+outline: 3px solid rgba(15, 95, 143, 0.35);
+outline-offset: 3px;
+}
+
+::selection {
+background: var(--color-primary-soft);
+}
+
+/* -----------------------------
+Typography
+----------------------------- */
+
+h1,
+h2,
+h3,
+h4 {
+color: var(--color-text);
+line-height: 1.15;
+letter-spacing: -0.03em;
+}
+
+h1 {
+margin: 0 0 1rem;
+font-size: clamp(2.45rem, 7vw, 5rem);
+max-width: 920px;
+}
+
+h2 {
+margin: 0 0 1rem;
+font-size: clamp(1.75rem, 4vw, 3rem);
+}
+
+h3 {
+margin: 0 0 0.5rem;
+font-size: clamp(1.1rem, 2vw, 1.25rem);
+}
+
+h4 {
+margin: 0 0 0.4rem;
+font-size: 1rem;
+}
+
+p {
+margin: 0 0 1rem;
+}
+
+ul,
+ol {
+margin-top: 0;
+padding-left: 1.25rem;
+}
+
+li + li {
+margin-top: 0.4rem;
+}
+
+strong {
+font-weight: 850;
+}
+
+.eyebrow {
+margin: 0;
+color: var(--color-primary);
+font-weight: 850;
+text-transform: uppercase;
+letter-spacing: 0.08em;
+font-size: 0.85rem;
+}
+
+.lede,
+.hero-summary {
+max-width: var(--max-width-readable);
+font-size: clamp(1.15rem, 2vw, 1.4rem);
+color: var(--color-muted);
+}
+
+.muted,
+.disclosure-note,
+.availability-detail {
+color: var(--color-muted);
+}
+
+.small-text {
+font-size: 0.95rem;
+}
+
+/* -----------------------------
+Layout Utilities
+----------------------------- */
+
+.section-inner,
+.hero-content,
+.site-footer-inner {
+width: min(100%, var(--max-width));
+margin: 0 auto;
+}
+
+.narrow-inner {
+width: min(100%, var(--max-width-narrow));
+margin: 0 auto;
+}
+
+.readable-inner {
+width: min(100%, var(--max-width-readable));
+margin: 0 auto;
+}
+
+.section-block {
+padding: var(--space-section-y) var(--space-page-x);
+}
+
+.section-block.alt {
+background: var(--color-surface);
+}
+
+.section-block.blue {
+background: var(--color-surface-blue);
+}
+
+.section-heading {
+max-width: 850px;
+margin-bottom: 1.5rem;
+}
+
+.section-intro {
+max-width: 850px;
+color: var(--color-muted);
+font-size: 1.06rem;
+}
+
+.stack-sm > * + * {
+margin-top: 0.75rem;
+}
+
+.stack-md > * + * {
+margin-top: 1rem;
+}
+
+.stack-lg > * + * {
+margin-top: 1.5rem;
+}
+
+/* -----------------------------
+Header / Navigation
+----------------------------- */
+
+.site-header {
+position: sticky;
+top: 0;
+z-index: 10;
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 1.25rem;
+padding: 0.9rem clamp(1rem, 4vw, 3rem);
+border-bottom: 1px solid var(--color-border);
+background: rgba(255, 255, 255, 0.96);
+backdrop-filter: blur(12px);
+}
+
+.site-branding a {
+color: var(--color-text);
+font-weight: 850;
+text-decoration: none;
+letter-spacing: -0.04em;
+}
+
+.primary-navigation {
+display: none;
+align-items: center;
+gap: 1rem;
+font-size: 0.95rem;
+}
+
+.primary-navigation a {
+color: var(--color-muted);
+text-decoration: none;
+font-weight: 650;
+}
+
+.primary-navigation a:hover {
+color: var(--color-primary);
+}
+
+.header-call-button,
+.primary-call-button,
+.secondary-button {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+min-height: 52px;
+padding: 0.85rem 1.25rem;
+border-radius: var(--radius-pill);
+font-weight: 850;
+text-decoration: none;
+text-align: center;
+line-height: 1.1;
+}
+
+.header-call-button,
+.primary-call-button {
+background: var(--color-primary);
+color: #ffffff;
+}
+
+.header-call-button:hover,
+.primary-call-button:hover {
+background: var(--color-primary-dark);
+color: #ffffff;
+}
+
+.header-call-button {
+white-space: nowrap;
+font-size: 0.95rem;
+}
+
+.primary-call-button {
+min-height: 64px;
+padding: 1rem 1.55rem;
+font-size: clamp(1.25rem, 3vw, 1.7rem);
+box-shadow: var(--shadow-cta);
+}
+
+.secondary-button {
+border: 1px solid var(--color-border);
+background: #ffffff;
+color: var(--color-primary);
+}
+
+.secondary-button:hover {
+border-color: var(--color-primary);
+background: var(--color-primary-soft);
+color: var(--color-primary-dark);
+}
+
+/* -----------------------------
+Hero / Centerpiece Modules
+----------------------------- */
+
+.hero {
+padding: var(--space-hero-y) var(--space-page-x);
+border-bottom: 1px solid var(--color-border);
+}
+
+.emergency-call-module {
+background:
+radial-gradient(circle at 82% 20%, rgba(15, 95, 143, 0.12), transparent 30%),
+linear-gradient(135deg, var(--color-surface-blue) 0%, #ffffff 58%);
+}
+
+.trust-hero {
+background:
+radial-gradient(circle at 82% 18%, rgba(15, 95, 143, 0.1), transparent 28%),
+linear-gradient(135deg, #ffffff 0%, var(--color-surface) 100%);
+}
+
+.condition-hero {
+background:
+radial-gradient(circle at 85% 18%, rgba(194, 65, 12, 0.08), transparent 30%),
+linear-gradient(135deg, var(--color-surface-blue) 0%, #ffffff 60%);
+}
+
+.cost-hero {
+background:
+radial-gradient(circle at 82% 20%, rgba(15, 95, 143, 0.1), transparent 30%),
+linear-gradient(135deg, #f8fafc 0%, #ffffff 62%);
+}
+
+.hero-content {
+display: grid;
+gap: 1rem;
+}
+
+.hero-phone {
+margin: 0.5rem 0 0.25rem;
+}
+
+.availability-note {
+max-width: 800px;
+margin: 0;
+font-weight: 800;
+color: var(--color-text);
+}
+
+.disclosure-note {
+max-width: 850px;
+margin: 0;
+font-size: 0.98rem;
+}
+
+/* -----------------------------
+Cards / Visual Semantic Blocks
+----------------------------- */
+
+.card-grid {
+display: grid;
+gap: 1rem;
+margin-top: 1.5rem;
+}
+
+.card,
+.info-card,
+.service-card,
+.support-card,
+.condition-card,
+.cost-card,
+.availability-card,
+.faq-item,
+.legal-card,
+.process-step {
+padding: 1.25rem;
+border: 1px solid var(--color-border);
+border-radius: var(--radius-card);
+background: #ffffff;
+box-shadow: var(--shadow-card);
+}
+
+.card:hover,
+.info-card:hover,
+.service-card:hover,
+.support-card:hover,
+.condition-card:hover,
+.cost-card:hover,
+.availability-card:hover {
+box-shadow: var(--shadow-card-strong);
+}
+
+.card h3,
+.info-card h3,
+.service-card h3,
+.support-card h3,
+.condition-card h3,
+.cost-card h3,
+.availability-card h3,
+.faq-item h3,
+.legal-card h3,
+.process-step h3 {
+color: var(--color-text);
+}
+
+.service-card a,
+.support-card a,
+.condition-card a,
+.cost-card a {
+color: var(--color-text);
+text-decoration: none;
+}
+
+.service-card a:hover,
+.support-card a:hover,
+.condition-card a:hover,
+.cost-card a:hover {
+color: var(--color-primary);
+text-decoration: underline;
+text-underline-offset: 0.18em;
+}
+
+.info-card p:last-child,
+.service-card p:last-child,
+.support-card p:last-child,
+.condition-card p:last-child,
+.cost-card p:last-child,
+.availability-card p:last-child,
+.faq-item p:last-child,
+.legal-card p:last-child,
+.process-step p:last-child {
+margin-bottom: 0;
+}
+
+/* -----------------------------
+Process / Steps
+----------------------------- */
+
+.process-list {
+display: grid;
+gap: 1rem;
+padding-left: 0;
+list-style: none;
+counter-reset: process;
+margin: 1.5rem 0 0;
+}
+
+.process-step {
+position: relative;
+padding-left: 4.25rem;
+counter-increment: process;
+}
+
+.process-step::before {
+content: counter(process);
+position: absolute;
+left: 1.25rem;
+top: 1.25rem;
+display: grid;
+place-items: center;
+width: 2.15rem;
+height: 2.15rem;
+border-radius: var(--radius-pill);
+background: var(--color-primary);
+color: #ffffff;
+font-weight: 900;
+}
+
+/* -----------------------------
+Warning / Emergency Medical Blocks
+----------------------------- */
+
+.warning-card {
+margin: clamp(2rem, 5vw, 4rem) auto;
+padding: clamp(1.5rem, 4vw, 2.5rem);
+border: 1px solid var(--color-warning-border);
+border-radius: var(--radius-large);
+background: var(--color-warning-bg);
+color: var(--color-warning-text);
+width: min(calc(100% - 2rem), var(--max-width));
+}
+
+.warning-card h2,
+.warning-card h3 {
+color: var(--color-warning-text);
+}
+
+.warning-card p:last-child {
+margin-bottom: 0;
+}
+
+.emergency-note {
+border-left: 4px solid var(--color-emergency);
+padding: 1rem 1.25rem;
+border-radius: var(--radius-sm);
+background: var(--color-warning-bg);
+color: var(--color-warning-text);
+}
+
+/* -----------------------------
+Disclosure / Trust / Legal Blocks
+----------------------------- */
+
+.referral-disclosure {
+background: var(--color-disclosure-bg);
+border-top: 1px solid var(--color-border);
+border-bottom: 1px solid var(--color-border);
+}
+
+.referral-disclosure .section-inner,
+.legal-document .section-inner {
+max-width: 1000px;
+}
+
+.disclosure-box {
+padding: 1.25rem;
+border: 1px solid var(--color-border);
+border-radius: var(--radius-card);
+background: var(--color-surface);
+color: var(--color-muted);
+}
+
+.legal-document {
+background: #ffffff;
+}
+
+.legal-document h1 {
+max-width: var(--max-width-narrow);
+}
+
+.legal-document .section-inner {
+display: grid;
+gap: 1.75rem;
+}
+
+.legal-section {
+padding-bottom: 1.75rem;
+border-bottom: 1px solid var(--color-border);
+}
+
+.legal-section:last-child {
+border-bottom: 0;
+}
+
+/* -----------------------------
+FAQ
+----------------------------- */
+
+.faq-list {
+display: grid;
+gap: 1rem;
+margin-top: 1.5rem;
+}
+
+.faq-item {
+max-width: 100%;
+}
+
+/* Optional native accordion style if details/summary is used */
+details.faq-item {
+cursor: pointer;
+}
+
+details.faq-item summary {
+font-weight: 850;
+color: var(--color-text);
+}
+
+details.faq-item p {
+margin-top: 0.75rem;
+}
+
+/* -----------------------------
+Internal Link Lists
+----------------------------- */
+
+.link-list {
+display: grid;
+gap: 0.75rem;
+padding-left: 0;
+list-style: none;
+}
+
+.link-list li {
+margin: 0;
+}
+
+.link-list a {
+display: inline-flex;
+align-items: center;
+gap: 0.4rem;
+font-weight: 750;
+}
+
+/* -----------------------------
+Tables / Cost and Comparison Content
+----------------------------- */
+
+.table-wrap {
+overflow-x: auto;
+border: 1px solid var(--color-border);
+border-radius: var(--radius-card);
+background: #ffffff;
+box-shadow: var(--shadow-card);
+}
+
+table {
+width: 100%;
+border-collapse: collapse;
+}
+
+th,
+td {
+padding: 0.9rem 1rem;
+border-bottom: 1px solid var(--color-border);
+text-align: left;
+vertical-align: top;
+}
+
+th {
+background: var(--color-surface);
+color: var(--color-text);
+font-weight: 850;
+}
+
+tr:last-child td {
+border-bottom: 0;
+}
+
+/* -----------------------------
+CTA Bands
+----------------------------- */
+
+.cta-band {
+padding: clamp(2rem, 5vw, 4rem) var(--space-page-x);
+background: var(--color-primary);
+color: #ffffff;
+}
+
+.cta-band .section-inner {
+display: grid;
+gap: 1rem;
+}
+
+.cta-band h2,
+.cta-band p {
+color: #ffffff;
+}
+
+.cta-band .primary-call-button {
+background: #ffffff;
+color: var(--color-primary);
+box-shadow: none;
+}
+
+.cta-band .primary-call-button:hover {
+background: var(--color-primary-soft);
+color: var(--color-primary-dark);
+}
+
+/* -----------------------------
+Footer
+----------------------------- */
+
+.site-footer {
+padding: 2rem var(--space-page-x);
+border-top: 1px solid var(--color-border);
+background: var(--color-surface);
+color: var(--color-muted);
+font-size: 0.95rem;
+}
+
+.footer-call {
+margin: 1.25rem 0;
+}
+
+.footer-navigation {
+display: flex;
+flex-wrap: wrap;
+gap: 0.75rem 1rem;
+margin-top: 1.25rem;
+}
+
+.footer-navigation a {
+color: var(--color-muted);
+font-weight: 650;
+text-decoration: none;
+}
+
+.footer-navigation a:hover {
+color: var(--color-primary);
+text-decoration: underline;
+text-underline-offset: 0.18em;
+}
+
+/* -----------------------------
+Responsive Grids
+----------------------------- */
+
+@media (min-width: 760px) {
+.card-grid.two {
+grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.card-grid.three {
+grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.card-grid.four {
+grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.process-list {
+grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.process-step {
+padding-left: 1.25rem;
+padding-top: 4.1rem;
+}
+
+.process-step::before {
+top: 1.25rem;
+}
+
+.cta-band .section-inner {
+grid-template-columns: 1fr auto;
+align-items: center;
+}
+}
+
+@media (min-width: 1060px) {
+.primary-navigation {
+display: flex;
+}
+
+.card-grid.four {
+grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+}
+
+/* -----------------------------
+Mobile
+----------------------------- */
+
+@media (max-width: 760px) {
+h1 {
+font-size: clamp(2.25rem, 12vw, 3.75rem);
+}
+
+.hero {
+padding-top: 2.75rem;
+}
+
+.section-block {
+padding-top: 2.5rem;
+padding-bottom: 2.5rem;
+}
+}
+
+@media (max-width: 520px) {
+.site-header {
+align-items: flex-start;
+flex-direction: column;
+}
+
+.header-call-button,
+.primary-call-button,
+.secondary-button {
+width: 100%;
+}
+
+.site-branding a {
+font-size: 0.98rem;
+}
+
+.emergency-call-module {
+padding-top: 2.5rem;
+}
+
+.card,
+.info-card,
+.service-card,
+.support-card,
+.condition-card,
+.cost-card,
+.availability-card,
+.faq-item,
+.legal-card,
+.process-step {
+padding: 1rem;
+}
+
+.process-step {
+padding-left: 3.75rem;
+}
+
+.process-step::before {
+left: 1rem;
+}
+}
+
+/* -----------------------------
+Print
+----------------------------- */
+
+@media print {
+.site-header,
+.primary-navigation,
+.header-call-button,
+.primary-call-button,
+.secondary-button,
+.footer-navigation {
+display: none !important;
+}
+
+body {
+color: #000000;
+background: #ffffff;
+}
+
+.section-block,
+.hero,
+.warning-card {
+padding: 1rem 0;
+margin: 0;
+}
+
+.card,
+.info-card,
+.service-card,
+.support-card,
+.condition-card,
+.cost-card,
+.availability-card,
+.faq-item,
+.legal-card,
+.process-step,
+.warning-card {
+box-shadow: none;
+border-color: #cccccc;
+}
+}
